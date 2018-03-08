@@ -1,0 +1,50 @@
+<ScrollView android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_margin="15dp">
+        <TextView
+            android:id="@+id/DietPlan_DaytextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            android:textSize="25sp"
+
+            />
+        <TextView
+            android:id="@+id/DietPlan_textView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:hint="Fetch......"
+            android:textSize="20sp"
+            android:inputType="none"
+            android:layout_below="@id/DietPlan_DaytextView"
+            />
+        <ProgressBar
+            android:id="@+id/DietPlan_ProgressBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:visibility="gone"/>
+
+
+
+        <Button
+            android:id="@+id/DietPlan_FetchButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_below="@+id/DietPlan_textView"
+            android:layout_marginEnd="18dp"
+            android:layout_marginTop="22dp"
+            android:text="Fetching..." />
+    </RelativeLayout>
+
+
+
+
+
+</ScrollView>
