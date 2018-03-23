@@ -34,6 +34,7 @@ public class dietPlan extends AppCompatActivity {
         fetch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                fetch.setVisibility(View.GONE);
                 JSONObject user = new JSONObject();
                 dietPlanAsync dietPlanAsync = new dietPlanAsync(getApplicationContext());
                 dietPlanAsync.textView(diet_plan,progressBar);

@@ -33,7 +33,11 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 try {
-                    onLogin();
+                    if(inputUserName.getText().toString().trim().equals("")){
+                        inputUserName.setError("This field can not be blank");
+                    }else if(inputPassword.getText().toString().trim().equals("")){
+                        inputPassword.setError("This field can not be blank");
+                    } else onLogin();
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -50,7 +54,9 @@ public class LoginActivity extends AppCompatActivity {
     private void onLogin() throws JSONException {
         JSONObject user = new JSONObject();
         String UserName = inputUserName.getText().toString().trim();
+
         String Password = inputPassword.getText().toString().trim();
+
         user.put("User_UserName",UserName);
         user.put("User_Password",Password);
         String type ="Login";

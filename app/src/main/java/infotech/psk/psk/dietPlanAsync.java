@@ -32,6 +32,7 @@ public class dietPlanAsync extends AsyncTask<String,Void,String> {
     @SuppressLint("StaticFieldLeak")
     private ProgressBar progressBar1;
 
+
     dietPlanAsync(Context ctx){
         context = ctx;
 

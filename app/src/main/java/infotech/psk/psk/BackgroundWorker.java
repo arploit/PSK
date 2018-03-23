@@ -60,12 +60,11 @@ public class BackgroundWorker extends AsyncTask<String,Void,String> {
                 httpURLConnection.setDoInput(true);
                 httpURLConnection.setFixedLengthStreamingMode(strings[1].getBytes().length);
                 httpURLConnection.setRequestProperty("Content-Type", "application/json;charset=utf-8");
-                Log.d("JSP",httpURLConnection.getRequestProperties().toString());
                 httpURLConnection.setRequestProperty("X-Requested-With", "XMLHttpRequest");
-                Log.d("JSP",httpURLConnection.getRequestProperties().toString());
+
                 httpURLConnection.setRequestProperty("Connection", "close");
                 httpURLConnection.connect();
-                System.out.print("User Login"+strings[1].toString());
+
 
                 DataOutputStream wr = new DataOutputStream(httpURLConnection.getOutputStream());
                 Log.d("JSP",wr.toString());
@@ -75,11 +74,9 @@ public class BackgroundWorker extends AsyncTask<String,Void,String> {
 
 
                 InputStream in = httpURLConnection.getInputStream();
-                Log.d("JSP",in.toString());
+
                 InputStreamReader inputStreamReader = new InputStreamReader(in);
-                Log.d("JSP",inputStreamReader.toString());
                 int inputStreamData = inputStreamReader.read();
-                Log.d("JSPppp", String.valueOf(inputStreamData));
                 while (inputStreamData != -1) {
                     char current = (char) inputStreamData;
                     inputStreamData = inputStreamReader.read();
@@ -99,7 +96,7 @@ public class BackgroundWorker extends AsyncTask<String,Void,String> {
 
         }
         if(strings[0].equals("register")){
-            Log.d("JSP",strings[0]);
+
             return getServerResponse(strings[1]);
         }
 
@@ -122,29 +119,27 @@ public class BackgroundWorker extends AsyncTask<String,Void,String> {
             httpURLConnection.setDoInput(true);
             httpURLConnection.setFixedLengthStreamingMode(json.getBytes().length);
             httpURLConnection.setRequestProperty("Content-Type", "application/json;charset=utf-8");
-            Log.d("JSP",httpURLConnection.getRequestProperties().toString());
             httpURLConnection.setRequestProperty("X-Requested-With", "XMLHttpRequest");
-            Log.d("JSP",httpURLConnection.getRequestProperties().toString());
             httpURLConnection.connect();
 
             DataOutputStream wr = new DataOutputStream(httpURLConnection.getOutputStream());
-            Log.d("JSP",wr.toString());
+
             wr.write(json.getBytes());
-            Log.d("JSP",wr.toString());
+
             wr.flush();
 
 
             InputStream in = httpURLConnection.getInputStream();
-            Log.d("JSP",in.toString());
+
             InputStreamReader inputStreamReader = new InputStreamReader(in);
-            Log.d("JSP",inputStreamReader.toString());
+
             int inputStreamData = inputStreamReader.read();
-            Log.d("JSPppp", String.valueOf(inputStreamData));
+
             while (inputStreamData != -1) {
                 char current = (char) inputStreamData;
                 inputStreamData = inputStreamReader.read();
                 data += current;
-            System.out.print("return from server" + data);}
+           }
             wr.close();
             in.close();
 
@@ -182,7 +177,7 @@ public class BackgroundWorker extends AsyncTask<String,Void,String> {
                     ).show();
 
         }
-        else if (result.equals("Registration Failed") || result.equals("Login Failed"))
+        else if (result.equals("Registration Failed") )
         {
             progressBar1.setVisibility(View.INVISIBLE);
             Toast.makeText
@@ -191,6 +186,19 @@ public class BackgroundWorker extends AsyncTask<String,Void,String> {
                             "Failed....", Toast.LENGTH_SHORT
                     ).show();
 
+        }else if ( result.equals("Login Failed")){
+            progressBar1.setVisibility(View.INVISIBLE);
+            Toast.makeText
+                    (
+                            BackgroundWorkerContext.getApplicationContext(),
+                            "Failed....", Toast.LENGTH_SHORT
+                    ).show();
+            BackgroundWorkerContext.startActivity(
+                    new Intent
+                            (
+                                    BackgroundWorkerContext.getApplicationContext(),
+                                    Registration.class
+                            ).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
         }
 
         else if (result.equals("Registration Successful"))
@@ -231,9 +239,15 @@ public class BackgroundWorker extends AsyncTask<String,Void,String> {
 
            Toast.makeText(
 
-                   BackgroundWorkerContext.getApplicationContext(),result,Toast.LENGTH_SHORT
+                   BackgroundWorkerContext.getApplicationContext(),result +" Register then",Toast.LENGTH_SHORT
 
            ).show();
+            BackgroundWorkerContext.startActivity(
+                    new Intent
+                            (
+                                    BackgroundWorkerContext.getApplicationContext(),
+                                    Registration.class
+                            ).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
 
         }
     }
